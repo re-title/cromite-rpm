@@ -40,6 +40,8 @@ jobs:
 
       - name: Update spec file if needed
         id: update_spec
+        env: 
+          FORCE_BUILD: ${{ github.event.inputs.force_build }}
         run: |
           CURRENT_VERSION=$(grep '^Version:' cromite.spec | awk '{print $2}')
           LATEST_VERSION="${{ steps.get_release.outputs.LATEST_VERSION }}"
