@@ -50,6 +50,7 @@ jobs:
           echo "LATEST_VERSION: $LATEST_VERSION"
           echo "CROMITE_COMMIT: $CROMITE_COMMIT"
           echo "SHA256: $SHA256"
+          echo "FORCE_BUILD: $FORCE_BUILD"
 
           if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ] && [ "$FORCE_BUILD" != "true" ]; then
             echo "NEEDS_UPDATE=false" >> $GITHUB_OUTPUT
