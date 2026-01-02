@@ -1,7 +1,13 @@
 name: Check for Update, Build and Release
 
 on:
-  workflow_dispatch: # 
+  workflow_dispatch: 
+    inputs:
+      force_build:
+        description: 'Force build even if version is up to date'
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: '0 0 * * *'
 
@@ -45,7 +51,7 @@ jobs:
           echo "CROMITE_COMMIT: $CROMITE_COMMIT"
           echo "SHA256: $SHA256"
 
-          if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
+          if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ] && [ "$FORCE_BUILD" != "true" ]; then
             echo "NEEDS_UPDATE=false" >> $GITHUB_OUTPUT
             exit 0
           fi
